@@ -1,4 +1,4 @@
-package com.tdscientist.shelfview;
+package com.rilixtech.shelfview;
 
 import android.content.Context;
 import android.os.Environment;
@@ -14,7 +14,7 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Copyright (c) 2017 Adediji Adeyinka(tdscientist)
@@ -22,15 +22,15 @@ import java.util.ArrayList;
  * Created on 11-Feb-2017
  */
 
-public class ShelfAdapter extends BaseAdapter {
+class ShelfAdapter extends BaseAdapter {
 
-  Context context;
-  Utils utils;
-  ArrayList<ShelfModel> model;
+  private Context context;
+  private Utils utils;
+  private List<ShelfModel> model;
   //int bookSource = 999;
-  String internalStorage;
+  private String internalStorage;
 
-  public ShelfAdapter(Context context, ArrayList<ShelfModel> model) {
+  public ShelfAdapter(Context context, List<ShelfModel> model) {
     this.context = context;
     this.model = model;
     this.utils = new Utils(context);
@@ -50,7 +50,6 @@ public class ShelfAdapter extends BaseAdapter {
   }
 
   private class ViewHolder {
-
     ImageView shelfBackground, bookCover;
     CardView bookBackground;
     ProgressBar progressBar;
@@ -177,26 +176,26 @@ public class ShelfAdapter extends BaseAdapter {
               });
         }
         break;
-      default:
-        if (model.getShow() && !bookCover.equals("")) {
-          Picasso.with(context)
-              .load(model.getBookCoverSource())
-              .resize(utils.dpToPixels(context.getResources().getInteger(R.integer.book_width)),
-                  utils.dpToPixels(context.getResources().getInteger(R.integer.book_height)))
-              .into(holder.bookCover, new Callback() {
-                @Override public void onSuccess() {
-                  holder.bookBackground.setVisibility(!model.getShow() ? View.GONE : View.VISIBLE);
-                  holder.progressBar.setVisibility(View.GONE);
-                  holder.spine_grey.setVisibility(View.VISIBLE);
-                  holder.spine_white.setVisibility(View.VISIBLE);
-                }
 
-                @Override public void onError() {
-
-                }
-              });
-        }
-        break;
+      //default:
+      //  if (model.getShow() && !bookCover.equals("")) {
+      //    Picasso.with(context)
+      //        .load(model.getBookCoverSource())
+      //        .resize(utils.dpToPixels(context.getResources().getInteger(R.integer.book_width)),
+      //            utils.dpToPixels(context.getResources().getInteger(R.integer.book_height)))
+      //        .into(holder.bookCover, new Callback() {
+      //          @Override public void onSuccess() {
+      //            holder.bookBackground.setVisibility(!model.getShow() ? View.GONE : View.VISIBLE);
+      //            holder.progressBar.setVisibility(View.GONE);
+      //            holder.spine_grey.setVisibility(View.VISIBLE);
+      //            holder.spine_white.setVisibility(View.VISIBLE);
+      //          }
+      //
+      //          @Override public void onError() {
+      //
+      //          }
+      //        });
+      //  }
     }
 
     return convertView;

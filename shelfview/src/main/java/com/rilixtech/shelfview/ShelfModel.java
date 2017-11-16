@@ -1,4 +1,4 @@
-package com.tdscientist.shelfview;
+package com.rilixtech.shelfview;
 
 /**
  * Copyright (c) 2017 Adediji Adeyinka(tdscientist)
@@ -6,7 +6,7 @@ package com.tdscientist.shelfview;
  * Created on 11-Feb-2017
  */
 
-public class ShelfModel {
+class ShelfModel {
 
   private String bookCoverSource;
   private String bookId;
@@ -15,7 +15,7 @@ public class ShelfModel {
   private String type;
   private BookSource bookSource;
 
-  public ShelfModel(String bookCoverSource, String bookId, String bookTitle, Boolean show, String type, BookSource bookSource) {
+  ShelfModel(String bookCoverSource, String bookId, String bookTitle, Boolean show, String type, BookSource bookSource) {
     this.bookCoverSource = bookCoverSource;
     this.bookId = bookId;
     this.bookTitle = bookTitle;

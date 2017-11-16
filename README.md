@@ -1,14 +1,11 @@
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-ShelfView-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/5299) [![MaterialUp](https://img.shields.io/badge/MaterialUp-ShelfView-deepblue.svg?style=flat)](https://material.uplabs.com/posts/shelfview)
-
-
 ## ShelfView ##
 
-*Android custom view to display books on shelf* `     ` **([iOS version is available here](https://github.com/tdscientist/ShelfView-iOS))** 
+*Android custom view to display books on shelf
 
 <img src="/portrait.png" width="340"> <img src="/landscape.png" width="528">
 
 
-
+A fork project of [ShelfView](https://github.com/tdscientist/ShelfView)
 
 #### How to use ####
 ----
@@ -16,19 +13,19 @@
 **build.gradle**
 ```
 allprojects {
-            repositories {
-                maven {
-                    url 'https://jitpack.io'
-                }
-            }
-        }
+      repositories {
+           maven {
+               url 'https://jitpack.io'
+           }
+      }
+}
 ```
 
 
 ```
 dependencies {
-	        compile 'com.github.tdscientist:ShelfView:v1.0'
-	}
+        compile 'com.github.joielechong:ShelfView:2.0'
+}
 ```
 
 **Layout**
@@ -58,11 +55,9 @@ public class MainActivity extends AppCompatActivity implements ShelfView.BookCli
         shelfView.setOnBookClicked(this);
         ArrayList<BookModel> models = new ArrayList<>();
 
-        models.add(new BookModel("http://eurodroid.com/pics/beginning_android_book.jpg", "1", "Beginning Android"));
+        models.add(BookModel.UrlBookModel("http://eurodroid.com/pics/beginning_android_book.jpg", "1", "Beginning Android"));
        
- 		shelfView.loadData(models, ShelfView.BOOK_SOURCE_URL);
-
-
+ 		shelfView.loadData(models);
     }
 
 	@Override
@@ -81,24 +76,24 @@ public class MainActivity extends AppCompatActivity implements ShelfView.BookCli
 
 * Internal/External directory in the device
 ```
-model.add(new BookModel("/path/to/android_book_cover.jpg", "1", "Let's Talk About Android"));
-shelfView.loadData(model, ShelfView.BOOK_SOURCE_FILE);
+model.add(BookModel.fileBookModel("/path/to/android_book_cover.jpg", "1", "Let's Talk About Android"));
+shelfView.loadData(model);
 ``` 
 
 
 
 * Assets folder
 ```
-model.add(new BookModel("android.jpg", "1", "Android for Experts"));
-shelfView.loadData(model, ShelfView.BOOK_SOURCE_ASSETS_FOLDER);
+model.add(BookModel.assetBookModel("android.jpg", "1", "Android for Experts"));
+shelfView.loadData(model);
 ```
  
 
 
 * Drawable folder
 ```
-model.add(new BookModel("alice", "1", "Alice in Wonderland"));
-shelfView.loadData(model, ShelfView.BOOK_SOURCE_DRAWABLE_FOLDER);
+model.add(BookModel.drawableBookModel("alice", "1", "Alice in Wonderland"));
+shelfView.loadData(model);
 ``` 
 
 
@@ -114,6 +109,8 @@ shelfView.loadData(model, ShelfView.BOOK_SOURCE_DRAWABLE_FOLDER);
 #### License ####
 ----
 ```
+Copyright 2017 Joielechong
+
 Copyright 2017 Adeyinka Adediji
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -128,11 +125,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ```
-
-
-#### Contributions & Bug Reporting ####
----
-tdscientist@gmail.com 
 
 
 

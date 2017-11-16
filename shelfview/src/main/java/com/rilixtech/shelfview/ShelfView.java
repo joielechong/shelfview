@@ -1,4 +1,4 @@
-package com.tdscientist.shelfview;
+package com.rilixtech.shelfview;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.GridView;
-
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Copyright (c) 2017 Adediji Adeyinka(tdscientist)
@@ -22,8 +22,8 @@ public class ShelfView extends GridView implements AdapterView.OnItemClickListen
 
   Utils utils;
   private ShelfAdapter shelfAdapter;
-  private ArrayList<BookModel> bookModel = new ArrayList<>();
-  private ArrayList<ShelfModel> shelfModel;
+  private List<BookModel> bookModel = new ArrayList<>();
+  private List<ShelfModel> shelfModel;
   private int numberOfTilesPerRow;
   private int shelfHeight;
   private int shelfWidth;
@@ -73,7 +73,7 @@ public class ShelfView extends GridView implements AdapterView.OnItemClickListen
   //  }, 300);
   //}
 
-  public void loadData(final ArrayList<BookModel> bookModel) {
+  public void loadData(final List<BookModel> bookModel) {
     //this.shelfAdapter.setBookSource(bookSource);
     new Handler().postDelayed(new Runnable() {
       @Override public void run() {
@@ -86,7 +86,7 @@ public class ShelfView extends GridView implements AdapterView.OnItemClickListen
    * Actual book population on the shelf
    */
 
-  private void processData(final ArrayList<BookModel> bookModel) {
+  private void processData(final List<BookModel> bookModel) {
     this.bookModel.clear();
     this.bookModel.addAll(bookModel);
     this.shelfModel.clear();
@@ -154,7 +154,7 @@ public class ShelfView extends GridView implements AdapterView.OnItemClickListen
    * Create an empty shelf, in preparation for the books
    */
 
-  private void initData(final ArrayList<BookModel> bookModel) {
+  private void initData(final List<BookModel> bookModel) {
     this.bookModel.clear();
     this.bookModel.addAll(bookModel);
     this.shelfModel.clear();

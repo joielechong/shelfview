@@ -1,9 +1,9 @@
-package com.tdscientist.shelfview;
+package com.rilixtech.shelfview;
 
 /**
  * Created by joielechong on 11/16/17.
  */
 
-public enum BookSource {
+enum BookSource {
   FILE, URL, ASSET_FOLDER, DRAWABLE_FOLDER, NONE
 }

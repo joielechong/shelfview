@@ -1,4 +1,4 @@
-package com.tdscientist.shelfview;
+package com.rilixtech.shelfview;
 
 /**
  * Copyright (c) 2017 Adediji Adeyinka(tdscientist)
@@ -55,15 +55,15 @@ public class BookModel {
     return new BookModel(bookCoverSource, bookId, bookTitle, BookSource.FILE);
   }
 
-  public static BookModel UrlBookModel(String bookCoverSource, String bookId, String bookTitle) {
+  public static BookModel urlBookModel(String bookCoverSource, String bookId, String bookTitle) {
     return new BookModel(bookCoverSource, bookId, bookTitle, BookSource.URL);
   }
 
-  public static BookModel AssetBookModel(String bookCoverSource, String bookId, String bookTitle) {
+  public static BookModel assetBookModel(String bookCoverSource, String bookId, String bookTitle) {
     return new BookModel(bookCoverSource, bookId, bookTitle, BookSource.ASSET_FOLDER);
   }
 
-  public static BookModel DrawableBookModel(String bookCoverSource, String bookId, String bookTitle) {
+  public static BookModel drawableBookModel(String bookCoverSource, String bookId, String bookTitle) {
     return new BookModel(bookCoverSource, bookId, bookTitle, BookSource.DRAWABLE_FOLDER);
   }
 }

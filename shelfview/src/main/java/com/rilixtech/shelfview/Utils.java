@@ -1,4 +1,4 @@
-package com.tdscientist.shelfview;
+package com.rilixtech.shelfview;
 
 import android.content.Context;
 
@@ -8,7 +8,7 @@ import android.content.Context;
  * Created on 11-Feb-2017
  */
 
-public class Utils {
+class Utils {
 
   private Context mContext;
 
