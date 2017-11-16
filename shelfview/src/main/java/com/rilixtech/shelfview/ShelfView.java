@@ -12,12 +12,6 @@ import android.widget.GridView;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Copyright (c) 2017 Adediji Adeyinka(tdscientist)
- * All rights reserved
- * Created on 11-Feb-2017
- */
-
 public class ShelfView extends GridView implements AdapterView.OnItemClickListener {
 
   Utils utils;

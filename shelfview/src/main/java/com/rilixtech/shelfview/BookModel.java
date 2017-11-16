@@ -1,11 +1,5 @@
 package com.rilixtech.shelfview;
 
-/**
- * Copyright (c) 2017 Adediji Adeyinka(tdscientist)
- * All rights reserved
- * Created on 11-Feb-2017
- */
-
 public class BookModel {
   private String bookCoverSource;
   private String bookId;

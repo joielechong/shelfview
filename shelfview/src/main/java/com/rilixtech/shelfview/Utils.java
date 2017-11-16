@@ -2,12 +2,6 @@ package com.rilixtech.shelfview;
 
 import android.content.Context;
 
-/**
- * Copyright (c) 2017 Adediji Adeyinka(tdscientist)
- * All rights reserved
- * Created on 11-Feb-2017
- */
-
 class Utils {
 
   private Context mContext;
