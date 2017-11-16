@@ -1,7 +1,6 @@
 package com.rilixtech.shelfview;
 
 class ShelfModel {
-
   private String bookCoverSource;
   private String bookId;
   private String bookTitle;

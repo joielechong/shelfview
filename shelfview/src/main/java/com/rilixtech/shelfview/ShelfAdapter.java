@@ -19,14 +19,12 @@ import java.util.List;
 class ShelfAdapter extends BaseAdapter {
 
   private Context mContext;
-  private Utils utils;
   private List<ShelfModel> mShelfModels;
   private String internalStorage;
 
   ShelfAdapter(Context context, List<ShelfModel> shelfModels) {
     this.mContext = context;
     this.mShelfModels = shelfModels;
-    this.utils = new Utils(context);
     this.internalStorage = Environment.getExternalStorageDirectory().toString();
   }
 
@@ -43,10 +41,11 @@ class ShelfAdapter extends BaseAdapter {
   }
 
   private static class ViewHolder {
-    ImageView shelfBackground, bookCover;
-    CardView bookBackground;
-    ProgressBar progressBar;
-    View spine_grey, spine_white;
+    ImageView imvShelfBackground;
+    ImageView imvBookCover;
+    CardView cvBookBackground;
+    ProgressBar pgbLoad;
+    View vSpineGrey, vSpineWhite;
   }
 
   @Override public View getView(int position, View convertView, ViewGroup parent) {
@@ -57,12 +56,12 @@ class ShelfAdapter extends BaseAdapter {
       LayoutInflater mInflater = LayoutInflater.from(mContext);
       convertView = mInflater.inflate(R.layout.book_shelf_grid_item, parent, false);
       holder = new ViewHolder();
-      holder.shelfBackground = (ImageView) convertView.findViewById(R.id.shelf_background);
-      holder.bookCover = (ImageView) convertView.findViewById(R.id.book_cover);
-      holder.bookBackground = (CardView) convertView.findViewById(R.id.book_background);
-      holder.progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar);
-      holder.spine_grey = convertView.findViewById(R.id.spine_grey);
-      holder.spine_white = convertView.findViewById(R.id.spine_white);
+      holder.imvShelfBackground = convertView.findViewById(R.id.shelf_background);
+      holder.imvBookCover = convertView.findViewById(R.id.book_cover_imv);
+      holder.cvBookBackground = convertView.findViewById(R.id.book_background_cv);
+      holder.pgbLoad = convertView.findViewById(R.id.load_pgb);
+      holder.vSpineGrey = convertView.findViewById(R.id.spine_grey_view);
+      holder.vSpineWhite = convertView.findViewById(R.id.spine_white_view);
       convertView.setTag(holder);
     }
     // Recycler view
@@ -72,17 +71,17 @@ class ShelfAdapter extends BaseAdapter {
 
     final ShelfModel model = this.mShelfModels.get(position);
 
-    holder.progressBar.setVisibility(!model.getShow() ? View.GONE : View.VISIBLE);
+    holder.pgbLoad.setVisibility(!model.getShow() ? View.GONE : View.VISIBLE);
 
     switch (model.getType()) {
       case "start":
-        holder.shelfBackground.setImageResource(R.drawable.grid_item_background_left);
+        holder.imvShelfBackground.setImageResource(R.drawable.grid_item_background_left);
         break;
       case "end":
-        holder.shelfBackground.setImageResource(R.drawable.grid_item_background_right);
+        holder.imvShelfBackground.setImageResource(R.drawable.grid_item_background_right);
         break;
       default:
-        holder.shelfBackground.setImageResource(R.drawable.grid_item_background_center);
+        holder.imvShelfBackground.setImageResource(R.drawable.grid_item_background_center);
         break;
     }
 
@@ -94,14 +93,14 @@ class ShelfAdapter extends BaseAdapter {
         if (model.getShow() && !bookCover.equals("")) {
           Picasso.with(mContext)
               .load(new File(internalStorage + bookCover))
-              .resize(utils.dpToPixels(mContext.getResources().getInteger(R.integer.book_width)),
-                  utils.dpToPixels(mContext.getResources().getInteger(R.integer.book_height)))
-              .into(holder.bookCover, new Callback() {
+              .resize(Utils.dpToPixels(mContext, mContext.getResources().getInteger(R.integer.book_width)),
+                  Utils.dpToPixels(mContext, mContext.getResources().getInteger(R.integer.book_height)))
+              .into(holder.imvBookCover, new Callback() {
                 @Override public void onSuccess() {
-                  holder.bookBackground.setVisibility(!model.getShow() ? View.GONE : View.VISIBLE);
-                  holder.progressBar.setVisibility(View.GONE);
-                  holder.spine_grey.setVisibility(View.VISIBLE);
-                  holder.spine_white.setVisibility(View.VISIBLE);
+                  holder.cvBookBackground.setVisibility(!model.getShow() ? View.GONE : View.VISIBLE);
+                  holder.pgbLoad.setVisibility(View.GONE);
+                  holder.vSpineGrey.setVisibility(View.VISIBLE);
+                  holder.vSpineWhite.setVisibility(View.VISIBLE);
                 }
 
                 @Override public void onError() {
@@ -114,14 +113,14 @@ class ShelfAdapter extends BaseAdapter {
         if (model.getShow() && !bookCover.equals("")) {
           Picasso.with(mContext)
               .load(bookCover)
-              .resize(utils.dpToPixels(mContext.getResources().getInteger(R.integer.book_width)),
-                  utils.dpToPixels(mContext.getResources().getInteger(R.integer.book_height)))
-              .into(holder.bookCover, new Callback() {
+              .resize(Utils.dpToPixels(mContext, mContext.getResources().getInteger(R.integer.book_width)),
+                  Utils.dpToPixels(mContext, mContext.getResources().getInteger(R.integer.book_height)))
+              .into(holder.imvBookCover, new Callback() {
                 @Override public void onSuccess() {
-                  holder.bookBackground.setVisibility(!model.getShow() ? View.GONE : View.VISIBLE);
-                  holder.progressBar.setVisibility(View.GONE);
-                  holder.spine_grey.setVisibility(View.VISIBLE);
-                  holder.spine_white.setVisibility(View.VISIBLE);
+                  holder.cvBookBackground.setVisibility(!model.getShow() ? View.GONE : View.VISIBLE);
+                  holder.pgbLoad.setVisibility(View.GONE);
+                  holder.vSpineGrey.setVisibility(View.VISIBLE);
+                  holder.vSpineWhite.setVisibility(View.VISIBLE);
                 }
 
                 @Override public void onError() {
@@ -134,14 +133,14 @@ class ShelfAdapter extends BaseAdapter {
         if (model.getShow() && !bookCover.equals("")) {
           Picasso.with(mContext)
               .load("file:///android_asset/" + bookCover)
-              .resize(utils.dpToPixels(mContext.getResources().getInteger(R.integer.book_width)),
-                  utils.dpToPixels(mContext.getResources().getInteger(R.integer.book_height)))
-              .into(holder.bookCover, new Callback() {
+              .resize(Utils.dpToPixels(mContext, mContext.getResources().getInteger(R.integer.book_width)),
+                  Utils.dpToPixels(mContext, mContext.getResources().getInteger(R.integer.book_height)))
+              .into(holder.imvBookCover, new Callback() {
                 @Override public void onSuccess() {
-                  holder.bookBackground.setVisibility(!model.getShow() ? View.GONE : View.VISIBLE);
-                  holder.progressBar.setVisibility(View.GONE);
-                  holder.spine_grey.setVisibility(View.VISIBLE);
-                  holder.spine_white.setVisibility(View.VISIBLE);
+                  holder.cvBookBackground.setVisibility(!model.getShow() ? View.GONE : View.VISIBLE);
+                  holder.pgbLoad.setVisibility(View.GONE);
+                  holder.vSpineGrey.setVisibility(View.VISIBLE);
+                  holder.vSpineWhite.setVisibility(View.VISIBLE);
                 }
 
                 @Override public void onError() {
@@ -154,14 +153,14 @@ class ShelfAdapter extends BaseAdapter {
         if (model.getShow() && !bookCover.equals("")) {
           Picasso.with(mContext)
               .load(mContext.getResources().getIdentifier(bookCover, "drawable", mContext.getPackageName()))
-              .resize(utils.dpToPixels(mContext.getResources().getInteger(R.integer.book_width)),
-                  utils.dpToPixels(mContext.getResources().getInteger(R.integer.book_height)))
-              .into(holder.bookCover, new Callback() {
+              .resize(Utils.dpToPixels(mContext, mContext.getResources().getInteger(R.integer.book_width)),
+                  Utils.dpToPixels(mContext, mContext.getResources().getInteger(R.integer.book_height)))
+              .into(holder.imvBookCover, new Callback() {
                 @Override public void onSuccess() {
-                  holder.bookBackground.setVisibility(!model.getShow() ? View.GONE : View.VISIBLE);
-                  holder.progressBar.setVisibility(View.GONE);
-                  holder.spine_grey.setVisibility(View.VISIBLE);
-                  holder.spine_white.setVisibility(View.VISIBLE);
+                  holder.cvBookBackground.setVisibility(!model.getShow() ? View.GONE : View.VISIBLE);
+                  holder.pgbLoad.setVisibility(View.GONE);
+                  holder.vSpineGrey.setVisibility(View.VISIBLE);
+                  holder.vSpineWhite.setVisibility(View.VISIBLE);
                 }
 
                 @Override public void onError() {
@@ -175,14 +174,14 @@ class ShelfAdapter extends BaseAdapter {
         if (model.getShow() && !bookCover.equals("")) {
           Picasso.with(mContext)
               .load(model.getBookCoverSource())
-              .resize(utils.dpToPixels(mContext.getResources().getInteger(R.integer.book_width)),
-                  utils.dpToPixels(mContext.getResources().getInteger(R.integer.book_height)))
-              .into(holder.bookCover, new Callback() {
+              .resize(Utils.dpToPixels(mContext, mContext.getResources().getInteger(R.integer.book_width)),
+                  Utils.dpToPixels(mContext, mContext.getResources().getInteger(R.integer.book_height)))
+              .into(holder.imvBookCover, new Callback() {
                 @Override public void onSuccess() {
-                  holder.bookBackground.setVisibility(!model.getShow() ? View.GONE : View.VISIBLE);
-                  holder.progressBar.setVisibility(View.GONE);
-                  holder.spine_grey.setVisibility(View.VISIBLE);
-                  holder.spine_white.setVisibility(View.VISIBLE);
+                  holder.cvBookBackground.setVisibility(!model.getShow() ? View.GONE : View.VISIBLE);
+                  holder.pgbLoad.setVisibility(View.GONE);
+                  holder.vSpineGrey.setVisibility(View.VISIBLE);
+                  holder.vSpineWhite.setVisibility(View.VISIBLE);
                 }
 
                 @Override public void onError() {
@@ -190,7 +189,7 @@ class ShelfAdapter extends BaseAdapter {
                 }
               });
         } else {
-          holder.bookBackground.setVisibility(View.GONE);
+          holder.cvBookBackground.setVisibility(View.GONE);
         }
     }
 

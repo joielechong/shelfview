@@ -1,6 +1,6 @@
 ## ShelfView ##
 
-*Android custom view to display books on shelf
+**Android custom view to display books on shelf**
 
 <img src="/portrait.png" width="340"> <img src="/landscape.png" width="528">
 
@@ -37,12 +37,12 @@ dependencies {
 
 ```
 
-
 **Activity**
 ```
 import com.rilixtech.shelfview.BookModel;
 import com.rilixtech.shelfview.ShelfView;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements ShelfView.BookClickListener {
 
@@ -53,17 +53,17 @@ public class MainActivity extends AppCompatActivity implements ShelfView.BookCli
 
         ShelfView shelfView = (ShelfView) findViewById(R.id.shelfView);
         shelfView.setOnBookClicked(this);
-        ArrayList<BookModel> models = new ArrayList<>();
+        List<BookModel> models = new ArrayList<>();
 
         models.add(BookModel.urlBookModel("http://eurodroid.com/pics/beginning_android_book.jpg", "1", "Beginning Android"));
        
- 		shelfView.loadData(models);
+        shelfView.loadData(models);
     }
 
-	@Override
+    @Override
     public void onBookClicked(int position, String bookId, String bookTitle) {	
-    	// handle click events here 
-        //Toast.makeText(this, bookTitle, Toast.LENGTH_SHORT).show();
+       // handle click events here
+       //Toast.makeText(this, bookTitle, Toast.LENGTH_SHORT).show();
     }
 }
 
@@ -100,8 +100,8 @@ shelfView.loadData(model);
 #### Permissions ####
 ----
 ```
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+   <uses-permission android:name="android.permission.INTERNET" />
+   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 ``` 
 
 

@@ -1,4 +1,4 @@
-package com.tdscientist.shelfview;
+package com.rilixtech.shelfview;
 
 import org.junit.Test;
 

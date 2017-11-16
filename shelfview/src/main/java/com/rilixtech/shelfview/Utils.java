@@ -4,19 +4,19 @@ import android.content.Context;
 
 class Utils {
 
-  private Context mContext;
+  //private Context mContext;
+  private Utils(){}
+  //private Utils(Context mContext) {
+  //  this.mContext = mContext;
+  //}
 
-  public Utils(Context mContext) {
-    this.mContext = mContext;
-  }
-
-  public int dpToPixels(int dp) {
-    float scale = mContext.getResources().getDisplayMetrics().density;
+  static int dpToPixels(Context context, int dp) {
+    float scale = context.getResources().getDisplayMetrics().density;
     return (int) (dp * scale + 0.5f);
   }
 
-  public int pixelsToDp(int pixels) {
-    float scale = mContext.getResources().getDisplayMetrics().density;
+  static int pixelsToDp(Context context, int pixels) {
+    float scale = context.getResources().getDisplayMetrics().density;
     return (int) (pixels / scale + 0.5f);
   }
 }
