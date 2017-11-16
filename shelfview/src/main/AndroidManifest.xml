@@ -1,6 +1,1 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.tdscientist.shelfview">
-
-    <application />
-
-</manifest>
+<manifest package="com.tdscientist.shelfview"/>

@@ -1,6 +1,5 @@
 package com.tdscientist.shelfview;
 
-
 /**
  * Copyright (c) 2017 Adediji Adeyinka(tdscientist)
  * All rights reserved
@@ -8,39 +7,64 @@ package com.tdscientist.shelfview;
  */
 
 public class BookModel {
+  private String bookCoverSource;
+  private String bookId;
+  private String bookTitle;
+  private BookSource bookSource;
 
-    private String bookCoverSource;
-    private String bookId;
-    private String bookTitle;
+  private BookModel(String bookCoverSource, String bookId, String bookTitle, BookSource bookSource) {
+    this.bookCoverSource = bookCoverSource;
+    this.bookId = bookId;
+    this.bookTitle = bookTitle;
+    this.bookSource = bookSource;
+  }
 
-    public BookModel(String bookCoverSource, String bookId, String bookTitle) {
-        this.bookCoverSource = bookCoverSource;
-        this.bookId = bookId;
-        this.bookTitle = bookTitle;
-    }
+  public String getBookCoverSource() {
+    return bookCoverSource;
+  }
 
-    public String getBookCoverSource() {
-        return bookCoverSource;
-    }
+  public void setBookCoverSource(String bookCoverSource) {
+    this.bookCoverSource = bookCoverSource;
+  }
 
-    public void setBookCoverSource(String bookCoverSource) {
-        this.bookCoverSource = bookCoverSource;
-    }
+  public String getBookId() {
+    return bookId;
+  }
 
-    public String getBookId() {
-        return bookId;
-    }
+  public void setBookId(String bookId) {
+    this.bookId = bookId;
+  }
 
-    public void setBookId(String bookId) {
-        this.bookId = bookId;
-    }
+  public String getBookTitle() {
+    return bookTitle;
+  }
 
-    public String getBookTitle() {
-        return bookTitle;
-    }
+  public void setBookTitle(String bookTitle) {
+    this.bookTitle = bookTitle;
+  }
 
-    public void setBookTitle(String bookTitle) {
-        this.bookTitle = bookTitle;
-    }
+  public BookSource getBookSource() {
+    return bookSource;
+  }
+
+  public void setBookSource(BookSource bookSource) {
+    this.bookSource = bookSource;
+  }
+
+  public static BookModel fileBookModel(String bookCoverSource, String bookId, String bookTitle) {
+    return new BookModel(bookCoverSource, bookId, bookTitle, BookSource.FILE);
+  }
+
+  public static BookModel UrlBookModel(String bookCoverSource, String bookId, String bookTitle) {
+    return new BookModel(bookCoverSource, bookId, bookTitle, BookSource.URL);
+  }
+
+  public static BookModel AssetBookModel(String bookCoverSource, String bookId, String bookTitle) {
+    return new BookModel(bookCoverSource, bookId, bookTitle, BookSource.ASSET_FOLDER);
+  }
+
+  public static BookModel DrawableBookModel(String bookCoverSource, String bookId, String bookTitle) {
+    return new BookModel(bookCoverSource, bookId, bookTitle, BookSource.DRAWABLE_FOLDER);
+  }
 }
 
