@@ -24,13 +24,13 @@ allprojects {
 
 ```
 dependencies {
-        compile 'com.github.joielechong:ShelfView:2.0'
+        compile 'com.github.joielechong:shelfview:2.1.1'
 }
 ```
 
 **Layout**
 ```
-<com.tdscientist.shelfview.ShelfView 		  
+<com.rilixtech.shelfview.ShelfView
     android:id="@+id/shelfView"
     android:layout_width="match_parent"
     android:layout_height="match_parent" />
@@ -40,8 +40,8 @@ dependencies {
 
 **Activity**
 ```
-import com.tdscientist.shelfview.BookModel;
-import com.tdscientist.shelfview.ShelfView;
+import com.rilixtech.shelfview.BookModel;
+import com.rilixtech.shelfview.ShelfView;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements ShelfView.BookClickListener {
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements ShelfView.BookCli
         shelfView.setOnBookClicked(this);
         ArrayList<BookModel> models = new ArrayList<>();
 
-        models.add(BookModel.UrlBookModel("http://eurodroid.com/pics/beginning_android_book.jpg", "1", "Beginning Android"));
+        models.add(BookModel.urlBookModel("http://eurodroid.com/pics/beginning_android_book.jpg", "1", "Beginning Android"));
        
  		shelfView.loadData(models);
     }
