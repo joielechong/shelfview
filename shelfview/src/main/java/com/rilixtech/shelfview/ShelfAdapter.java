@@ -88,7 +88,7 @@ class ShelfAdapter extends BaseAdapter {
 
     String bookCover = model.getBookCoverSource().trim();
 
-    //FILE, URL, ASSET_FOLDER, DRAWABLE_FOLDER, NONE
+    //FILE, URL, ASSET_FOLDER, DRAWABLE_NAME, NONE
     switch (model.getBookSource()) {
       case FILE:
         if (model.getShow() && !bookCover.equals("")) {
@@ -150,7 +150,7 @@ class ShelfAdapter extends BaseAdapter {
               });
         }
         break;
-      case DRAWABLE_FOLDER:
+      case DRAWABLE_NAME:
         if (model.getShow() && !bookCover.equals("")) {
           Picasso.with(mContext)
               .load(mContext.getResources().getIdentifier(bookCover, "drawable", mContext.getPackageName()))

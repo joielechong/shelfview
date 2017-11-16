@@ -5,5 +5,5 @@ package com.rilixtech.shelfview;
  */
 
 enum BookSource {
-  FILE, URL, ASSET_FOLDER, DRAWABLE_FOLDER, NONE
+  FILE, URL, ASSET_FOLDER, DRAWABLE_NAME, DRAWABLE_ID, RAW, NONE
 }

@@ -1,5 +1,8 @@
 package com.rilixtech.shelfview;
 
+import android.support.annotation.IdRes;
+import android.support.annotation.RawRes;
+
 public class BookModel {
   private String bookCoverSource;
   private String bookId;
@@ -53,12 +56,20 @@ public class BookModel {
     return new BookModel(bookCoverSource, bookId, bookTitle, BookSource.URL);
   }
 
-  public static BookModel assetBookModel(String bookCoverSource, String bookId, String bookTitle) {
-    return new BookModel(bookCoverSource, bookId, bookTitle, BookSource.ASSET_FOLDER);
+  public static BookModel assetBookModel(String assetName, String bookId, String bookTitle) {
+    return new BookModel(assetName, bookId, bookTitle, BookSource.ASSET_FOLDER);
   }
 
-  public static BookModel drawableBookModel(String bookCoverSource, String bookId, String bookTitle) {
-    return new BookModel(bookCoverSource, bookId, bookTitle, BookSource.DRAWABLE_FOLDER);
+  public static BookModel drawableBookModel(String drawableName, String bookId, String bookTitle) {
+    return new BookModel(drawableName, bookId, bookTitle, BookSource.DRAWABLE_NAME);
+  }
+
+  public static BookModel drawableBookModel(@IdRes int drawableId, String bookId, String bookTitle) {
+    return new BookModel(String.valueOf(drawableId), bookId, bookTitle, BookSource.DRAWABLE_ID);
+  }
+
+  public static BookModel rawBookModel(@RawRes int rawId, String bookId, String bookTitle) {
+    return new BookModel(String.valueOf(rawId), bookId, bookTitle, BookSource.RAW);
   }
 }
 
