@@ -5,10 +5,10 @@ class ShelfModel {
   private String bookId;
   private String bookTitle;
   private Boolean show;
-  private String type;
+  private ShelfType type;
   private BookSource bookSource;
 
-  ShelfModel(String bookCoverSource, String bookId, String bookTitle, Boolean show, String type, BookSource bookSource) {
+  ShelfModel(String bookCoverSource, String bookId, String bookTitle, Boolean show, ShelfType type, BookSource bookSource) {
     this.bookCoverSource = bookCoverSource;
     this.bookId = bookId;
     this.bookTitle = bookTitle;
@@ -49,11 +49,11 @@ class ShelfModel {
     this.show = show;
   }
 
-  public String getType() {
+  public ShelfType getType() {
     return type;
   }
 
-  public void setType(String type) {
+  public void setType(ShelfType type) {
     this.type = type;
   }
 

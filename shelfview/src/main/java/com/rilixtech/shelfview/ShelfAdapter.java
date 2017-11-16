@@ -22,10 +22,16 @@ class ShelfAdapter extends BaseAdapter {
   private List<ShelfModel> mShelfModels;
   private String internalStorage;
 
+  private int mTargetWidth;
+  private int mTargetHeight;
+
   ShelfAdapter(Context context, List<ShelfModel> shelfModels) {
     this.mContext = context;
     this.mShelfModels = shelfModels;
     this.internalStorage = Environment.getExternalStorageDirectory().toString();
+
+    mTargetWidth = Utils.dpToPixels(context, context.getResources().getInteger(R.integer.book_width));
+    mTargetHeight = Utils.dpToPixels(context, context.getResources().getInteger(R.integer.book_height));
   }
 
   @Override public int getCount() {
@@ -74,10 +80,10 @@ class ShelfAdapter extends BaseAdapter {
     holder.pgbLoad.setVisibility(!model.getShow() ? View.GONE : View.VISIBLE);
 
     switch (model.getType()) {
-      case "start":
+      case START:
         holder.imvShelfBackground.setImageResource(R.drawable.grid_item_background_left);
         break;
-      case "end":
+      case END:
         holder.imvShelfBackground.setImageResource(R.drawable.grid_item_background_right);
         break;
       default:
@@ -85,115 +91,62 @@ class ShelfAdapter extends BaseAdapter {
         break;
     }
 
-    String bookCover = model.getBookCoverSource().trim();
-
-    //FILE, URL, ASSET_FOLDER, DRAWABLE_NAME, NONE
-    switch (model.getBookSource()) {
-      case FILE:
-        if (model.getShow() && !bookCover.equals("")) {
-          Picasso.with(mContext)
-              .load(new File(internalStorage + bookCover))
-              .resize(Utils.dpToPixels(mContext, mContext.getResources().getInteger(R.integer.book_width)),
-                  Utils.dpToPixels(mContext, mContext.getResources().getInteger(R.integer.book_height)))
-              .into(holder.imvBookCover, new Callback() {
-                @Override public void onSuccess() {
-                  holder.cvBookBackground.setVisibility(!model.getShow() ? View.GONE : View.VISIBLE);
-                  holder.pgbLoad.setVisibility(View.GONE);
-                  holder.vSpineGrey.setVisibility(View.VISIBLE);
-                  holder.vSpineWhite.setVisibility(View.VISIBLE);
-                }
-
-                @Override public void onError() {
-
-                }
-              });
-        }
-        break;
-      case URL:
-        if (model.getShow() && !bookCover.equals("")) {
-          Picasso.with(mContext)
-              .load(bookCover)
-              .resize(Utils.dpToPixels(mContext, mContext.getResources().getInteger(R.integer.book_width)),
-                  Utils.dpToPixels(mContext, mContext.getResources().getInteger(R.integer.book_height)))
-              .into(holder.imvBookCover, new Callback() {
-                @Override public void onSuccess() {
-                  holder.cvBookBackground.setVisibility(!model.getShow() ? View.GONE : View.VISIBLE);
-                  holder.pgbLoad.setVisibility(View.GONE);
-                  holder.vSpineGrey.setVisibility(View.VISIBLE);
-                  holder.vSpineWhite.setVisibility(View.VISIBLE);
-                }
-
-                @Override public void onError() {
-
-                }
-              });
-        }
-        break;
-      case ASSET_FOLDER:
-        if (model.getShow() && !bookCover.equals("")) {
-          Picasso.with(mContext)
-              .load("file:///android_asset/" + bookCover)
-              .resize(Utils.dpToPixels(mContext, mContext.getResources().getInteger(R.integer.book_width)),
-                  Utils.dpToPixels(mContext, mContext.getResources().getInteger(R.integer.book_height)))
-              .into(holder.imvBookCover, new Callback() {
-                @Override public void onSuccess() {
-                  holder.cvBookBackground.setVisibility(!model.getShow() ? View.GONE : View.VISIBLE);
-                  holder.pgbLoad.setVisibility(View.GONE);
-                  holder.vSpineGrey.setVisibility(View.VISIBLE);
-                  holder.vSpineWhite.setVisibility(View.VISIBLE);
-                }
-
-                @Override public void onError() {
-
-                }
-              });
-        }
-        break;
-      case DRAWABLE_NAME:
-        if (model.getShow() && !bookCover.equals("")) {
-          Picasso.with(mContext)
-              .load(mContext.getResources().getIdentifier(bookCover, "drawable", mContext.getPackageName()))
-              .resize(Utils.dpToPixels(mContext, mContext.getResources().getInteger(R.integer.book_width)),
-                  Utils.dpToPixels(mContext, mContext.getResources().getInteger(R.integer.book_height)))
-              .into(holder.imvBookCover, new Callback() {
-                @Override public void onSuccess() {
-                  holder.cvBookBackground.setVisibility(!model.getShow() ? View.GONE : View.VISIBLE);
-                  holder.pgbLoad.setVisibility(View.GONE);
-                  holder.vSpineGrey.setVisibility(View.VISIBLE);
-                  holder.vSpineWhite.setVisibility(View.VISIBLE);
-                }
-
-                @Override public void onError() {
-
-                }
-              });
-        }
-        break;
-
-      default:
-        if (model.getShow() && !bookCover.equals("")) {
-          Picasso.with(mContext)
-              .load(model.getBookCoverSource())
-              .resize(Utils.dpToPixels(mContext, mContext.getResources().getInteger(R.integer.book_width)),
-                  Utils.dpToPixels(mContext, mContext.getResources().getInteger(R.integer.book_height)))
-              .into(holder.imvBookCover, new Callback() {
-                @Override public void onSuccess() {
-                  holder.cvBookBackground.setVisibility(!model.getShow() ? View.GONE : View.VISIBLE);
-                  holder.pgbLoad.setVisibility(View.GONE);
-                  holder.vSpineGrey.setVisibility(View.VISIBLE);
-                  holder.vSpineWhite.setVisibility(View.VISIBLE);
-                }
-
-                @Override public void onError() {
-
-                }
-              });
-        } else {
-          holder.cvBookBackground.setVisibility(View.GONE);
-        }
-    }
-
+    loadImageWithPicasso(mContext, model, holder);
     return convertView;
+  }
+
+  private void loadImageWithPicasso(Context context, final ShelfModel model, final ViewHolder holder) {
+    String bookCover = model.getBookCoverSource().trim();
+    if (model.getShow() && !bookCover.equals("")) {
+
+      Callback callback = new Callback() {
+        @Override public void onSuccess() {
+          holder.cvBookBackground.setVisibility(!model.getShow() ? View.GONE : View.VISIBLE);
+          holder.pgbLoad.setVisibility(View.GONE);
+          holder.vSpineGrey.setVisibility(View.VISIBLE);
+          holder.vSpineWhite.setVisibility(View.VISIBLE);
+        }
+
+        @Override public void onError() {
+
+        }
+      };
+
+      switch (model.getBookSource()) {
+        case FILE:
+          Picasso.with(context)
+              .load(new File(internalStorage + bookCover))
+              .resize(mTargetWidth, mTargetHeight)
+              .into(holder.imvBookCover, callback);
+          break;
+        case URL:
+          Picasso.with(context).load(bookCover).resize(mTargetWidth, mTargetHeight).into(holder.imvBookCover, callback);
+          break;
+        case ASSET_FOLDER:
+          Picasso.with(context)
+              .load("file:///android_asset/" + bookCover)
+              .resize(mTargetWidth, mTargetHeight)
+              .into(holder.imvBookCover, callback);
+          break;
+        case DRAWABLE_NAME:
+          Picasso.with(context)
+              .load(context.getResources().getIdentifier(bookCover, "drawable", context.getPackageName()))
+              .resize(mTargetWidth, mTargetHeight)
+              .into(holder.imvBookCover, callback);
+          break;
+        case NONE:
+          Picasso.with(context)
+              .load(model.getBookCoverSource())
+              .resize(mTargetWidth, mTargetHeight)
+              .into(holder.imvBookCover, callback);
+          break;
+      }
+    } else {
+      holder.cvBookBackground.setVisibility(View.GONE);
+      holder.pgbLoad.setVisibility(View.GONE);
+      holder.vSpineGrey.setVisibility(View.VISIBLE);
+      holder.vSpineWhite.setVisibility(View.VISIBLE);
+    }
   }
 
 }

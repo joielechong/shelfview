@@ -80,11 +80,11 @@ public class ShelfView extends GridView implements AdapterView.OnItemClickListen
       String bookTitle = bookModel.get(i).getBookTitle();
       BookSource bookSource = bookModel.get(i).getBookSource();
       if ((i % mNumberOfTilesPerRow) == 0) {
-        mShelfModels.add(new ShelfModel(bookCoverSource, bookId, bookTitle, true, "start", bookSource));
+        mShelfModels.add(new ShelfModel(bookCoverSource, bookId, bookTitle, true, ShelfType.START, bookSource));
       } else if ((i % mNumberOfTilesPerRow) == (mNumberOfTilesPerRow - 1)) {
-        mShelfModels.add(new ShelfModel(bookCoverSource, bookId, bookTitle, true, "end", bookSource));
+        mShelfModels.add(new ShelfModel(bookCoverSource, bookId, bookTitle, true, ShelfType.END, bookSource));
       } else {
-        mShelfModels.add(new ShelfModel(bookCoverSource, bookId, bookTitle, true, "", bookSource));
+        mShelfModels.add(new ShelfModel(bookCoverSource, bookId, bookTitle, true, ShelfType.NONE, bookSource));
       }
     }
 
@@ -97,9 +97,9 @@ public class ShelfView extends GridView implements AdapterView.OnItemClickListen
       int fillUp = mNumberOfTilesPerRow - remainderTiles;
       for (int i = 0; i < fillUp; i++) {
         if (i == (fillUp - 1)) {
-          mShelfModels.add(new ShelfModel("", "", "", false, "end", BookSource.NONE));
+          mShelfModels.add(new ShelfModel("", "", "", false, ShelfType.END, BookSource.NONE));
         } else {
-          mShelfModels.add(new ShelfModel("", "", "", false, "", BookSource.NONE));
+          mShelfModels.add(new ShelfModel("", "", "", false, ShelfType.NONE, BookSource.NONE));
         }
       }
     }
@@ -110,22 +110,22 @@ public class ShelfView extends GridView implements AdapterView.OnItemClickListen
       if (remainderRowHeight == 0) {
         for (int i = 0; i < mNumberOfTilesPerRow; i++) {
           if (i == 0) {
-            mShelfModels.add(new ShelfModel("", "", "", false, "start", BookSource.NONE));
+            mShelfModels.add(new ShelfModel("", "", "", false, ShelfType.START, BookSource.NONE));
           } else if (i == (mNumberOfTilesPerRow - 1)) {
-            mShelfModels.add(new ShelfModel("", "", "", false, "end", BookSource.NONE));
+            mShelfModels.add(new ShelfModel("", "", "", false, ShelfType.END, BookSource.NONE));
           } else {
-            mShelfModels.add(new ShelfModel("", "", "", false, "", BookSource.NONE));
+            mShelfModels.add(new ShelfModel("", "", "", false, ShelfType.NONE, BookSource.NONE));
           }
         }
       } else if (remainderRowHeight > 0) {
         int fillUp = mNumberOfTilesPerRow * (remainderRowHeight + 1);
         for (int i = 0; i < fillUp; i++) {
           if ((i % mNumberOfTilesPerRow) == 0) {
-            mShelfModels.add(new ShelfModel("", "", "", false, "start", BookSource.NONE));
+            mShelfModels.add(new ShelfModel("", "", "", false, ShelfType.START, BookSource.NONE));
           } else if ((i % mNumberOfTilesPerRow) == (mNumberOfTilesPerRow - 1)) {
-            mShelfModels.add(new ShelfModel("", "", "", false, "end", BookSource.NONE));
+            mShelfModels.add(new ShelfModel("", "", "", false, ShelfType.END, BookSource.NONE));
           } else {
-            mShelfModels.add(new ShelfModel("", "", "", false, "", BookSource.NONE));
+            mShelfModels.add(new ShelfModel("", "", "", false, ShelfType.NONE, BookSource.NONE));
           }
         }
       }
@@ -168,9 +168,9 @@ public class ShelfView extends GridView implements AdapterView.OnItemClickListen
           int fillUp = mNumberOfTilesPerRow - remainderTiles;
           for (int i = 0; i < fillUp; i++) {
             if (i == (fillUp - 1)) {
-              mShelfModels.add(new ShelfModel("", "", "", false, "end", BookSource.NONE));
+              mShelfModels.add(new ShelfModel("", "", "", false, ShelfType.END, BookSource.NONE));
             } else {
-              mShelfModels.add(new ShelfModel("", "", "", false, "", BookSource.NONE));
+              mShelfModels.add(new ShelfModel("", "", "", false, ShelfType.NONE, BookSource.NONE));
             }
           }
         }
@@ -181,22 +181,22 @@ public class ShelfView extends GridView implements AdapterView.OnItemClickListen
           if (remainderRowHeight == 0) {
             for (int i = 0; i < mNumberOfTilesPerRow; i++) {
               if (i == 0) {
-                mShelfModels.add(new ShelfModel("", "", "", false, "start", BookSource.NONE));
+                mShelfModels.add(new ShelfModel("", "", "", false, ShelfType.START, BookSource.NONE));
               } else if (i == (mNumberOfTilesPerRow - 1)) {
-                mShelfModels.add(new ShelfModel("", "", "", false, "end", BookSource.NONE));
+                mShelfModels.add(new ShelfModel("", "", "", false, ShelfType.END, BookSource.NONE));
               } else {
-                mShelfModels.add(new ShelfModel("", "", "", false, "", BookSource.NONE));
+                mShelfModels.add(new ShelfModel("", "", "", false, ShelfType.NONE, BookSource.NONE));
               }
             }
           } else if (remainderRowHeight > 0) {
             int fillUp = mNumberOfTilesPerRow * (remainderRowHeight + 1);
             for (int i = 0; i < fillUp; i++) {
               if ((i % mNumberOfTilesPerRow) == 0) {
-                mShelfModels.add(new ShelfModel("", "", "", false, "start", BookSource.NONE));
+                mShelfModels.add(new ShelfModel("", "", "", false, ShelfType.START, BookSource.NONE));
               } else if ((i % mNumberOfTilesPerRow) == (mNumberOfTilesPerRow - 1)) {
-                mShelfModels.add(new ShelfModel("", "", "", false, "end", BookSource.NONE));
+                mShelfModels.add(new ShelfModel("", "", "", false, ShelfType.END, BookSource.NONE));
               } else {
-                mShelfModels.add(new ShelfModel("", "", "", false, "", BookSource.NONE));
+                mShelfModels.add(new ShelfModel("", "", "", false, ShelfType.NONE, BookSource.NONE));
               }
             }
           }
