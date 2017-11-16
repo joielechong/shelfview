@@ -20,8 +20,8 @@ public class ShelfView extends GridView implements AdapterView.OnItemClickListen
   private int mNumberOfTilesPerRow;
   private int mShelfHeight;
   private int mShelfWidth;
-  private int mGridViewColumnWidth = getContext().getResources().getInteger(R.integer.shelf_column_width);
-  private int mGridItemHeight = getContext().getResources().getInteger(R.integer.shelf_list_item);
+  private int mGridViewColumnWidth;
+  private int mGridItemHeight;
   private BookClickListener mBookClickListener;
 
   public ShelfView(Context context) {
@@ -46,6 +46,8 @@ public class ShelfView extends GridView implements AdapterView.OnItemClickListen
   }
 
   private void init(Context context) {
+    mGridViewColumnWidth = getContext().getResources().getInteger(R.integer.shelf_column_width);
+    mGridItemHeight = getContext().getResources().getInteger(R.integer.shelf_list_item);
     mShelfModels = new ArrayList<>();
     mBookModels = new ArrayList<>();
     mShelfAdapter = new ShelfAdapter(context, mShelfModels);
@@ -135,11 +137,7 @@ public class ShelfView extends GridView implements AdapterView.OnItemClickListen
   /**
    * Create an empty shelf, in preparation for the books
    */
-
   private void initData(final List<BookModel> bookModel) {
-    //this.mBookModels.clear();
-    //this.mBookModels.addAll(bookModel);
-    //this.mShelfModels.clear();
     setColumnWidth(Utils.dpToPixels(getContext(), getResources().getInteger(R.integer.shelf_column_width)));
     setHorizontalSpacing(0);
     setVerticalSpacing(0);

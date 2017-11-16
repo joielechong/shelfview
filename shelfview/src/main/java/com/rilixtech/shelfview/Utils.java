@@ -4,11 +4,7 @@ import android.content.Context;
 
 class Utils {
 
-  //private Context mContext;
   private Utils(){}
-  //private Utils(Context mContext) {
-  //  this.mContext = mContext;
-  //}
 
   static int dpToPixels(Context context, int dp) {
     float scale = context.getResources().getDisplayMetrics().density;
