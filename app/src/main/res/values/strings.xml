@@ -17,4 +17,7 @@
   <string name="title_100_q_and_a"><![CDATA[100 Questions & Answer]]></string>
   <string name="title_android_programming_for_beginners">Android Programming for Beginners</string>
   <string name="title_android_programming">Android Programming</string>
+  <string name="title_android_hacker">Android Hacker</string>
+  <string name="title_android_asynchronous">Asynchronous Android Programming</string>
+  <string name="title_expert_android_studio">Expert Android Studio</string>
 </resources>

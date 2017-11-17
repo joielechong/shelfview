@@ -36,9 +36,11 @@ public class MainActivity extends AppCompatActivity implements ShelfView.BookCli
         getString(R.string.title_android_programming)));
     model.add(BookModel.drawableBookModel("cover", "9", "Smashing Magazine"));
     model.add(BookModel.urlBookModel(getString(R.string.url_android_programming), "9", getString(R.string.title_android_programming)));
-    //model.add(BookModel.urlBookModel(getString(R.string.url_android_programming), "10", getString(R.string.title_android_programming)));
+    model.add(BookModel.assetBookModel("expert_android_studio.jpg", "10", getString(R.string.title_expert_android_studio)));
     model.add(BookModel.urlBookModel(getString(R.string.url_android_programming), "11",
         getString(R.string.title_android_programming)));
+    model.add(BookModel.rawBookModel(R.raw.android_hacker, "12", getString(R.string.title_android_hacker)));
+    model.add(BookModel.drawableBookModel(R.drawable.asynchronous_android, "13", getString(R.string.title_android_asynchronous)));
 
     shelfView.loadData(model);
   }

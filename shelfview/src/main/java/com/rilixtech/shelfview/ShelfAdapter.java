@@ -1,6 +1,8 @@
 package com.rilixtech.shelfview;
 
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
+import android.net.Uri;
 import android.os.Environment;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
@@ -21,6 +23,7 @@ class ShelfAdapter extends BaseAdapter {
   private Context mContext;
   private List<ShelfModel> mShelfModels;
   private String internalStorage;
+  private AssetFileDescriptor assetFileDescriptor = null; // For Asset and Raw file.
 
   private int mTargetWidth;
   private int mTargetHeight;
@@ -131,6 +134,20 @@ class ShelfAdapter extends BaseAdapter {
         case DRAWABLE_NAME:
           Picasso.with(context)
               .load(context.getResources().getIdentifier(bookCover, "drawable", context.getPackageName()))
+              .resize(mTargetWidth, mTargetHeight)
+              .into(holder.imvBookCover, callback);
+          break;
+        case DRAWABLE_ID:
+          Picasso.with(context)
+              .load(Integer.parseInt(bookCover))
+              .resize(mTargetWidth, mTargetHeight)
+              .into(holder.imvBookCover, callback);
+          break;
+        case RAW:
+          String path = "android.resource://" + mContext.getPackageName() + "/" + bookCover;
+          Uri uri = Uri.parse(path);
+          Picasso.with(context)
+              .load(uri)
               .resize(mTargetWidth, mTargetHeight)
               .into(holder.imvBookCover, callback);
           break;

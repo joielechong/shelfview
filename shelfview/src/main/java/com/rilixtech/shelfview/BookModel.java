@@ -1,6 +1,9 @@
 package com.rilixtech.shelfview;
 
+import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
+import android.support.annotation.IntDef;
+import android.support.annotation.IntegerRes;
 import android.support.annotation.RawRes;
 
 public class BookModel {
@@ -56,6 +59,13 @@ public class BookModel {
     return new BookModel(bookCoverSource, bookId, bookTitle, BookSource.URL);
   }
 
+  /**
+   * Add book with image from assets folder.
+   * @param assetName Name of assets file. Must be the complete name with extension.
+   * @param bookId id of book.
+   * @param bookTitle name of book.
+   * @return model of book
+   */
   public static BookModel assetBookModel(String assetName, String bookId, String bookTitle) {
     return new BookModel(assetName, bookId, bookTitle, BookSource.ASSET_FOLDER);
   }
@@ -64,7 +74,7 @@ public class BookModel {
     return new BookModel(drawableName, bookId, bookTitle, BookSource.DRAWABLE_NAME);
   }
 
-  public static BookModel drawableBookModel(@IdRes int drawableId, String bookId, String bookTitle) {
+  public static BookModel drawableBookModel(@DrawableRes int drawableId, String bookId, String bookTitle) {
     return new BookModel(String.valueOf(drawableId), bookId, bookTitle, BookSource.DRAWABLE_ID);
   }
 
