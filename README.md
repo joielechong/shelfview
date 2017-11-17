@@ -24,7 +24,7 @@ allprojects {
 
 ```
 dependencies {
-        compile 'com.github.joielechong:shelfview:2.1.2'
+        compile 'com.github.joielechong:shelfview:2.1.5'
 }
 ```
 
@@ -76,19 +76,15 @@ public class MainActivity extends AppCompatActivity implements ShelfView.BookCli
 
 * Internal/External directory in the device
 ```
-model.add(BookModel.fileBookModel("/path/to/android_book_cover.jpg", "1", "Let's Talk About Android"));
-shelfView.loadData(model);
-``` 
-
-
+models.add(BookModel.fileBookModel("/path/to/android_book_cover.jpg", "1", "Let's Talk About Android"));
+shelfView.loadData(models);
+```
 
 * Assets folder
 ```
-model.add(BookModel.assetBookModel("android.jpg", "1", "Android for Experts"));
-shelfView.loadData(model);
+models.add(BookModel.assetBookModel("android.jpg", "1", "Android for Experts"));
+shelfView.loadData(models);
 ```
- 
-
 
 * Drawable folder
 ```
@@ -96,6 +92,17 @@ model.add(BookModel.drawableBookModel("alice", "1", "Alice in Wonderland"));
 shelfView.loadData(model);
 ``` 
 
+* Drawable id
+```
+models.add(BookModel.drawableBookModel(R.drawable.asynchronous_android, "1", "Asynchronous Android"));
+shelfView.loadData(models);
+```
+
+* Raw resource id
+```
+models.add(R.raw.android_hacker, "1", "Android Hacker"));
+shelfView.loadData(models);
+```
 
 #### Permissions ####
 ----
