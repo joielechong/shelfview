@@ -1,7 +1,6 @@
 package com.rilixtech.shelfview;
 
 import android.content.Context;
-import android.content.res.AssetFileDescriptor;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.v7.widget.CardView;
@@ -23,8 +22,6 @@ class ShelfAdapter extends BaseAdapter {
   private Context mContext;
   private List<ShelfModel> mShelfModels;
   private String internalStorage;
-  private AssetFileDescriptor assetFileDescriptor = null; // For Asset and Raw file.
-
   private int mTargetWidth;
   private int mTargetHeight;
 
