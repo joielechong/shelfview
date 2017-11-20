@@ -22,13 +22,13 @@ class ShelfAdapter extends BaseAdapter {
   private Context mContext;
   private List<ShelfModel> mShelfModels;
   private String internalStorage;
+  private String mRawPath;
   private int mTargetWidth;
   private int mTargetHeight;
 
   ShelfAdapter(Context context, List<ShelfModel> shelfModels) {
     this.mContext = context;
     this.mShelfModels = shelfModels;
-    this.internalStorage = Environment.getExternalStorageDirectory().toString();
 
     mTargetWidth = Utils.dpToPixels(context, context.getResources().getInteger(R.integer.book_width));
     mTargetHeight = Utils.dpToPixels(context, context.getResources().getInteger(R.integer.book_height));
@@ -115,12 +115,15 @@ class ShelfAdapter extends BaseAdapter {
       switch (model.getBookSource()) {
         case FILE:
           Picasso.with(context)
-              .load(new File(internalStorage + bookCover))
+              .load(new File(getInternalStorage() + bookCover))
               .resize(mTargetWidth, mTargetHeight)
               .into(holder.imvBookCover, callback);
           break;
         case URL:
-          Picasso.with(context).load(bookCover).resize(mTargetWidth, mTargetHeight).into(holder.imvBookCover, callback);
+          Picasso.with(context)
+              .load(bookCover)
+              .resize(mTargetWidth, mTargetHeight)
+              .into(holder.imvBookCover, callback);
           break;
         case ASSET_FOLDER:
           Picasso.with(context)
@@ -141,12 +144,9 @@ class ShelfAdapter extends BaseAdapter {
               .into(holder.imvBookCover, callback);
           break;
         case RAW:
-          String path = "android.resource://" + mContext.getPackageName() + "/" + bookCover;
+          String path = getRawPath() + bookCover;
           Uri uri = Uri.parse(path);
-          Picasso.with(context)
-              .load(uri)
-              .resize(mTargetWidth, mTargetHeight)
-              .into(holder.imvBookCover, callback);
+          Picasso.with(context).load(uri).resize(mTargetWidth, mTargetHeight).into(holder.imvBookCover, callback);
           break;
         case NONE:
           Picasso.with(context)
@@ -163,4 +163,17 @@ class ShelfAdapter extends BaseAdapter {
     }
   }
 
+  private String getRawPath() {
+    if (mRawPath == null) {
+      mRawPath = "android.resource://" + mContext.getPackageName() + "/";
+    }
+    return mRawPath;
+  }
+
+  private String getInternalStorage() {
+    if (internalStorage == null) {
+      this.internalStorage = Environment.getExternalStorageDirectory().toString();
+    }
+    return internalStorage;
+  }
 }

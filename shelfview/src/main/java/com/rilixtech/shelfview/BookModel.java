@@ -1,9 +1,6 @@
 package com.rilixtech.shelfview;
 
 import android.support.annotation.DrawableRes;
-import android.support.annotation.IdRes;
-import android.support.annotation.IntDef;
-import android.support.annotation.IntegerRes;
 import android.support.annotation.RawRes;
 
 public class BookModel {
