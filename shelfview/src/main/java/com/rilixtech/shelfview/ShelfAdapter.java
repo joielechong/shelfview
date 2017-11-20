@@ -96,7 +96,7 @@ class ShelfAdapter extends BaseAdapter {
   }
 
   private void loadImageWithPicasso(Context context, final ShelfModel model, final ViewHolder holder) {
-    String bookCover = model.getBookCoverSource().trim();
+    String bookCover = model.getBookCoverSource();
     if (model.getShow() && !bookCover.equals("")) {
 
       Callback callback = new Callback() {
@@ -115,7 +115,7 @@ class ShelfAdapter extends BaseAdapter {
       switch (model.getBookSource()) {
         case FILE:
           Picasso.with(context)
-              .load(new File(getInternalStorage() + bookCover))
+              .load(new File(/*getInternalStorage() +*/ bookCover))
               .resize(mTargetWidth, mTargetHeight)
               .into(holder.imvBookCover, callback);
           break;

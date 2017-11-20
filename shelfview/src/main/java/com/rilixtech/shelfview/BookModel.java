@@ -48,8 +48,15 @@ public class BookModel {
     this.bookSource = bookSource;
   }
 
-  public static BookModel fileBookModel(String bookCoverSource, String bookId, String bookTitle) {
-    return new BookModel(bookCoverSource, bookId, bookTitle, BookSource.FILE);
+  /**
+   * Set book model from path of image file from external or internal sdcard
+   * @param coverImagePath path of cover image.
+   * @param bookId id of the book
+   * @param bookTitle title of the book
+   * @return model of the book
+   */
+  public static BookModel fileBookModel(String coverImagePath, String bookId, String bookTitle) {
+    return new BookModel(coverImagePath, bookId, bookTitle, BookSource.FILE);
   }
 
   public static BookModel urlBookModel(String bookCoverSource, String bookId, String bookTitle) {

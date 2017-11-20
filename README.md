@@ -24,7 +24,7 @@ allprojects {
 
 ```
 dependencies {
-        compile 'com.github.joielechong:shelfview:2.1.5'
+        compile 'com.github.joielechong:shelfview:2.1.7'
 }
 ```
 
