@@ -1,3 +1,5 @@
+## Project is moved to https://gitlab.com/joielechong/shelfview ##
+
 ## ShelfView ##
 
 **Android custom view to display books on shelf**
